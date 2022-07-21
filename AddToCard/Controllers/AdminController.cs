@@ -48,8 +48,8 @@ namespace AddToCard.Controllers
         [HttpPost]
         public ActionResult AddProduct(tbl_Product Prod,HttpPostedFileBase uploadImg)
         {
-            //List<tbl_Category> categorylist = db.tbl_Category.ToList();
-            //ViewBag.CatList = new SelectList(categorylist, "CatId", "catName");
+            List<tbl_Category> categorylist = db.tbl_Category.ToList();
+            ViewBag.CatList = new SelectList(categorylist, "CatId", "catName");
 
             var filename = Path.GetFileName(uploadImg.FileName);
             uploadImg.SaveAs(Server.MapPath("~/images/" + filename));
@@ -62,7 +62,8 @@ namespace AddToCard.Controllers
         }
         public ActionResult ListProduct()
         {
-            return View();
+            var listProd = db.tbl_Product.ToList();
+            return View(listProd);
         }
 
     }
