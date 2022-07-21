@@ -1,0 +1,134 @@
+﻿@model AddToCard.Models.tbl_Product
+
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>AddProduct</h2>
+
+<div class="container">
+
+    @using (Html.BeginForm("AddProduct", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+
+        <div class="row m-auto">
+
+            <div class="col-lg-4 col-md-12 col-sm-12 ">
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>tbl_Product</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Select Category</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.CatId, ViewBag.CatList as SelectList, "--- Select Category ---", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CatId, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 col-sm-12" id="ImageContainer">
+
+
+                <div class="prod-img">
+
+
+
+
+                    <img src="~/Images/No-Image-Placeholder.svg.png" class="img-responsive" id="ProdImage" width="300px" height="200px" />
+
+                    <div class=" mt-3" id="upload-photos">
+                        <button class="btn btn-primary" onclick="document.getElementById('BrowseImage').click(); return false;">Upload Image</button>
+                    </div>
+
+                    <input type="file" class="visually-hidden" id="BrowseImage" name="uploadImg">
+
+
+                </div>
+
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>
+
+
+
+
+
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+
+        //$("#upload-photos").click(function () {
+        //    $("#BrowseImage").trigger('click')
+        //})
+
+        $("#ProdImage").click(function () {
+            $("#BrowseImage").trigger('click')
+        })
+
+
+        $("#BrowseImage").change(function () {
+            if (this.files && this.files[0]) {
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(this.files[0]);
+                fileReader.onload = function (x) {
+
+                    $("#ProdImage").attr('src', x.target.result);
+                }
+            }
+        })
+    })
+</script>
+
+
+
+
