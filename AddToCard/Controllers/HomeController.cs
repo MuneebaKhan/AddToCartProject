@@ -109,5 +109,76 @@ namespace AddToCard.Controllers
             }
             return RedirectToAction("Index");
         }
-    }
+
+
+        [HttpGet]
+        public ActionResult CheckoutProceed()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Register","Account");
+            }
+            else
+            {
+
+                
+                return View();
+            }
+            
+        }
+        [HttpPost]
+        public ActionResult CheckoutProceed(string contact,string address,string Pay)
+        {
+            ViewBag.Contact = contact;
+            ViewBag.Address = address;
+            ViewBag.Pay = Pay;
+
+
+            if (ModelState.IsValid)
+            {
+                List<Cart> li2 = Session["Cart"] as List<Cart>;
+                tbl_Invoice inv = new tbl_Invoice();
+                inv.UserId = Convert.ToInt32(Session["Uid"].ToString());
+                inv.InvoiceDate = System.DateTime.Now;
+                inv.bill = (int)Session["total"];
+                inv.Payment = ViewBag.Pay;
+                db.tbl_Invoice.Add(inv);
+                db.SaveChanges();
+
+                foreach(var item in li2)
+                {
+                    tbl_Order order = new tbl_Order();
+                    order.ProdId = item.prodid;
+                    order.OrderDate = System.DateTime.Now;
+                    order.InvoiceId = inv.Invoiceid;
+                    order.UserId = Convert.ToInt32(Session["Uid"].ToString());
+
+                    order.Qty = item.qty;
+                    order.Unit = item.price;
+                    order.Total = item.bill;
+                    order.PayMethod = ViewBag.Pay;
+                    order.Contact = ViewBag.Contact;
+                    order.Address = ViewBag.Address;
+
+                    db.tbl_Order.Add(order);
+                    db.SaveChanges();
+                }
+                Session.Remove("total");
+                Session.Remove("Cart");
+                Session["msg"] = "Order Book Successfully";
+
+                return RedirectToAction("Index");
+
+            }
+
+            return RedirectToAction("CheckoutProceed");
+        }
+
+        public ActionResult Orders(int id)
+        {
+            var orderList = db.tbl_Invoice.Where(x=> x.UserId == id).ToList();
+
+            return View(orderList);
+        }
+  }
 }

@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "CheckoutProceed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CheckoutProceed</h2>
+@*<p>@Session["Email"]</p>*@
+
+
+<div class="container">
+    <input type="text" id="country" name="id" value='@Session["Email"]' readonly class="form-control">
+
+    @using (Html.BeginForm("CheckoutProceed", "Home", FormMethod.Post))
+    {
+        <table class="table table-borderedless">
+            <tr>
+
+                <td>@Html.TextBox("contact", "", new { @class = "form-control", placeholder = "Contact Number" })</td>
+            </tr>
+            <tr>
+
+                <td>@Html.TextBox("address", "", new { @class = "form-control", placeholder = "address" })</td>
+            </tr>
+            <tr>
+
+                <td>@Html.Label("PaymentType", new { @class = "a" })</td>
+                <td>
+                    @Html.RadioButton("Pay", "Cash")<span> Cash</span>
+                    @Html.RadioButton("Pay", "Credit")<span> Credit</span>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td></td>
+                <td><input type="submit" class="btn btn-info" value="Submit" /></td>
+            </tr>
+            @*<tr>
+                    <td>
+                        <p>@ViewBag.name</p>
+                        <p>@ViewBag.pass</p>
+                        <p>@ViewBag.email</p>
+                        <p>@ViewBag.dob</p>
+                        <p>@ViewBag.gender</p>
+                        <p>@ViewBag.comments</p>
+
+
+                    </td>
+
+                </tr>*@
+
+        </table>
+    }
+</div>
+
+@{ Html.EndForm();}

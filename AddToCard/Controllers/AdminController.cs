@@ -66,5 +66,12 @@ namespace AddToCard.Controllers
             return View(listProd);
         }
 
+
+        public ActionResult OrderDetails()
+        {
+            var orderList = db.tbl_Order.ToList();
+            return View(orderList);
+        }
+
     }
 }

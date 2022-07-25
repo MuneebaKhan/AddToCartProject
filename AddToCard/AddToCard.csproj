@@ -2169,6 +2169,9 @@
     <Content Include="Views\Admin\ListProduct.cshtml" />
     <Content Include="Views\Home\AddtoCart.cshtml" />
     <Content Include="Views\Home\Checkout.cshtml" />
+    <Content Include="Views\Home\CheckoutProceed.cshtml" />
+    <Content Include="Views\Admin\OrderDetails.cshtml" />
+    <Content Include="Views\Home\Orders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

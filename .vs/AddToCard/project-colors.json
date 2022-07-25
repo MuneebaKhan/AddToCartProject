@@ -5,6 +5,11 @@
       "ProjectGuid": "5d8413e8-4163-41bd-a2c9-efb33027cdff",
       "DisplayName": "AddToCard",
       "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
     }
   },
   "NextColorIndex": 1

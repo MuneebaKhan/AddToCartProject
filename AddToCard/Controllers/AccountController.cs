@@ -43,12 +43,15 @@ namespace AddToCard.Controllers
                 if(query.Role == "V")
                 {
                     FormsAuthentication.SetAuthCookie(query.Name, false);
+                    Session["Uid"] = query.UserId;
                     Session["User"] = query.Name;
+                    Session["Email"] = query.Email;
                     return RedirectToAction("Index", "Home");
                 }
                 else if(query.Role == "A")
                 {
                     FormsAuthentication.SetAuthCookie(query.Name, false);
+                    Session["Uid"] = query.UserId;
                     Session["User"] = query.Name;
                     return RedirectToAction("Index", "Admin");
                 }

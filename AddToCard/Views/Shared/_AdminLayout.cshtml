@@ -66,7 +66,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        
+
                         <a class="collapse-item" href="@Url.Action("AddCategory","Admin")">Add Category</a>
                         <a class="collapse-item" href="@Url.Action("ListCategory","Admin")">List Category</a>
                     </div>
@@ -83,12 +83,20 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                       
+
                         <a class="collapse-item" href="@Url.Action("AddProduct","Admin")">Add Product</a>
                         <a class="collapse-item" href="@Url.Action("ListProduct","Admin")">List of Products</a>
-                        
+
                     </div>
                 </div>
+            </li>
+
+            <!-- Nav Item - Order Detail -->
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("OrderDetails","Admin")">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Order Details</span>
+                </a>
             </li>
 
             <!-- Divider -->
